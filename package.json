@@ -1,7 +1,7 @@
 {
-    "name": "phaser3-webpack5-typescript-template",
+    "name": "ggj2026",
     "version": "0.1.0",
-    "description": "Phaser 3.90, Webpack 5, and TypeScript template",
+    "description": "Texit",
     "main": "src/ts/game.ts",
     "private": true,
     "scripts": {
@@ -13,27 +13,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/pavle-goloskokovic/phaser3-webpack5-typescript-template.git"
+        "url": "git+https://github.com/pavle-goloskokovic/ggj2026.git"
     },
-    "keywords": [
-        "phaser",
-        "type",
-        "script",
-        "typescript",
-        "boilerplate",
-        "template",
-        "gamedev",
-        "game",
-        "development",
-        "javascript",
-        "webpack"
-    ],
     "author": "Pavle Goloskoković",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/pavle-goloskokovic/phaser3-webpack5-typescript-template/issues"
+        "url": "https://github.com/pavle-goloskokovic/ggj2026/issues"
     },
-    "homepage": "https://github.com/pavle-goloskokovic/phaser3-webpack5-typescript-template#readme",
+    "homepage": "https://github.com/pavle-goloskokovic/ggj2026#readme",
     "dependencies": {
         "phaser": "^3.90.0"
     },
