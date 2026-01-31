@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Scene = Phaser.Scene;
 import AvatarBase from '../classes/AvatarBase';
+import Avatar from '../classes/Avatar';
 import SelectableItem from '../classes/SelectableItem';
 import { getRandomSpriteName } from '../constants';
 
@@ -44,10 +45,10 @@ export class Game extends Scene {
                         other.setSelected(false);
                     }
                 });
+
+                avatar.base.copy(base.list[0] as AvatarBase);
             });
         }
-
-        bases[0].setSelected(true);
 
         const itemCategories = ['accessory', 'facial', 'glasses', 'hair', 'hat'] as const;
         const itemCount = 10;
@@ -70,5 +71,12 @@ export class Game extends Scene {
                 .setScale(3);
             items.push(item);
         }
+
+        const secondRowBottom = items[itemsPerRow].getBounds().bottom;
+        const avatarY = (scale.height + secondRowBottom) / 2;
+        const avatar = new Avatar(this, scale.width / 3, avatarY)
+            .setScale(5);
+
+        bases[0].setSelected(true);
     }
 }

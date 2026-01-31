@@ -22,4 +22,15 @@ export default class AvatarBase extends Phaser.GameObjects.Container {
         // Add this container to the scene
         scene.add.existing(this);
     }
+
+    copy (source: AvatarBase): void
+    {
+        const targetChildren = this.list as Phaser.GameObjects.Image[];
+        const sourceChildren = source.list as Phaser.GameObjects.Image[];
+
+        for (let i = 0; i < targetChildren.length; i++)
+        {
+            targetChildren[i].setFrame(sourceChildren[i].frame.name);
+        }
+    }
 }
