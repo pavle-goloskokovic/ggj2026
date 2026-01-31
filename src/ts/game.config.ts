@@ -28,7 +28,7 @@ export const
         readonly w: number;
         readonly h: number;
     } = {
-        w: 1070,
+        w: 800,
         h: 600
     },
     /**

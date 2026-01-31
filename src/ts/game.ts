@@ -18,6 +18,11 @@ const config: GameConfig = {
     parent: 'container', // parent id - '' means  no container
     width: size.w,
     height: size.h,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
+    pixelArt: true,
     scene: [
         Boot,
         Preloader,
