@@ -40,5 +40,6 @@ export default class SelectableItem extends Phaser.GameObjects.Container {
     {
         this.selected = value;
         this.outline.setFrame(this.selected ? 'outline-selected' : 'outline-unselected');
+        this.emit('toggled', this.selected);
     }
 }

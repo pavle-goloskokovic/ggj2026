@@ -17,10 +17,35 @@ export class Game extends Scene {
         console.info('Game enter');
 
         const scale = this.scale;
-        const x = scale.width / 2;
-        const y = scale.height / 2;
+        const y = scale.height * 0.1;
+        const count = 5;
+        const spacing = scale.width / (count + 1);
+        const bases: SelectableItem[] = [];
 
-        new SelectableItem(this, x, y, new AvatarBase(this, 0, 0))
-            .setScale(5);
+        for (let i = 0; i < count; i++)
+        {
+            const x = spacing * (i + 1);
+            const base = new SelectableItem(this, x, y, new AvatarBase(this, 0, 0))
+                .setScale(3);
+            bases.push(base);
+
+            base.on('toggled', (selected: boolean) =>
+            {
+                if (!selected)
+                {
+                    return;
+                }
+
+                bases.forEach(other =>
+                {
+                    if (other !== base)
+                    {
+                        other.setSelected(false);
+                    }
+                });
+            });
+        }
+
+        bases[0].setSelected(true);
     }
 }
