@@ -3,6 +3,7 @@ import Scene = Phaser.Scene;
 import AvatarBase from '../classes/AvatarBase';
 import Avatar from '../classes/Avatar';
 import SelectableItem from '../classes/SelectableItem';
+import type { spriteCategories } from '../constants';
 import { getRandomSpriteName } from '../constants';
 
 /**
@@ -57,6 +58,7 @@ export class Game extends Scene {
         const row2Y = scale.height * 0.5;
         const itemSpacing = scale.width / (itemsPerRow + 1);
         const items: SelectableItem[] = [];
+        const usedFrames = new Set<string>();
 
         for (let i = 0; i < itemCount; i++)
         {
@@ -64,8 +66,15 @@ export class Game extends Scene {
             const colIndex = i % itemsPerRow;
             const x = itemSpacing * (colIndex + 1);
             const y = rowIndex === 0 ? row1Y : row2Y;
-            const category = itemCategories[i % itemCategories.length];
+            const category = Phaser.Utils.Array
+                .GetRandom(itemCategories as any as typeof spriteCategories[number][]);
             const spriteName = getRandomSpriteName(category);
+            if (usedFrames.has(spriteName))
+            {
+                i--;
+                continue;
+            }
+            usedFrames.add(spriteName);
             const image = this.add.image(0, 0, 'sprites', spriteName);
             const item = new SelectableItem(this, x, y, image)
                 .setScale(3);
