@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Scene = Phaser.Scene;
 import AvatarBase from '../classes/AvatarBase';
+import SelectableItem from '../classes/SelectableItem';
 
 /**
  * Game Phaser scene.
@@ -19,6 +20,7 @@ export class Game extends Scene {
         const x = scale.width / 2;
         const y = scale.height / 2;
 
-        new AvatarBase(this, x, y);
+        new SelectableItem(this, x, y, new AvatarBase(this, 0, 0))
+            .setScale(5);
     }
 }

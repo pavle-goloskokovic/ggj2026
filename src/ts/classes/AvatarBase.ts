@@ -11,9 +11,13 @@ export default class AvatarBase extends Phaser.GameObjects.Container {
         categories.forEach(category =>
         {
             const spriteName = getRandomSpriteName(category);
-            const sprite = scene.add.sprite(0, 0, 'sprites', spriteName);
-            this.add(sprite);
+            const image = scene.add.image(0, 0, 'sprites', spriteName);
+            this.add(image);
         });
+
+        // Set container size to first child size
+        const firstChild = this.list[0] as Phaser.GameObjects.Image;
+        this.setSize(firstChild.width, firstChild.height);
 
         // Add this container to the scene
         scene.add.existing(this);
