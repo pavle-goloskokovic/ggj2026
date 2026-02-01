@@ -111,7 +111,7 @@ export class Game extends Scene {
         avatar.setInteractive({ cursor: 'pointer' })
             .on('pointerdown', () =>
             {
-                this.scene.restart({
+                this.scene.start('pick', {
                     baseFrames: avatar.base.getFrames(),
                     itemFrames: avatar.getItemFrames(),
                     clueIndex

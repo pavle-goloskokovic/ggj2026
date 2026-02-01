@@ -13,6 +13,7 @@ import { size, stats } from './game.config';
 import { Boot } from './scenes/Boot';
 import { Preloader } from './scenes/Preloader';
 import { Game } from './scenes/Game';
+import { Pick } from './scenes/Pick';
 
 const config: GameConfig = {
     parent: 'container', // parent id - '' means  no container
@@ -26,7 +27,8 @@ const config: GameConfig = {
     scene: [
         Boot,
         Preloader,
-        Game
+        Game,
+        Pick
     ],
     loader: {
         maxRetries: 10
