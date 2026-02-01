@@ -3,7 +3,7 @@ import Scene = Phaser.Scene;
 import AvatarBase from '../classes/AvatarBase';
 import Avatar from '../classes/Avatar';
 import SelectableItem from '../classes/SelectableItem';
-import { getRandomSpriteName, itemCategories } from '../constants';
+import { getRandomSpriteName, itemCategories, clues } from '../constants';
 
 /**
  * Game Phaser scene.
@@ -19,6 +19,14 @@ export class Game extends Scene {
         console.info('Game enter');
 
         const scale = this.scale;
+
+        const bg = this.add.image(scale.width / 2, scale.height / 2, 'bg');
+        const scaleX = scale.width / bg.width;
+        const scaleY = scale.height / bg.height;
+        const bgScale = Math.max(scaleX, scaleY);
+        bg.setScale(bgScale)
+            .setAlpha(0.15);
+
         const y = scale.height * 0.1;
         const count = 5;
         const spacing = scale.width / (count + 1);
@@ -99,6 +107,14 @@ export class Game extends Scene {
                 }
             });
         });
+
+        const randomClue = Phaser.Utils.Array.GetRandom(clues as any as string[]);
+        this.add.text(scale.width * 2 / 3, avatarY, randomClue, {
+            fontSize: '24px',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 250 }
+        }).setOrigin(0.5);
 
         bases[0].setSelected(true);
     }

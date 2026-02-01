@@ -4,7 +4,7 @@ export const
      * @type {string}
      */
     title =
-        'Phaser 3.90, Webpack 5, and TypeScript template', // TODO update
+        'Texit | GGJ 2026',
     /**
      * Game description used for html page metadata.
      * @type {string}

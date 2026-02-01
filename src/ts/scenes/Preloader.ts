@@ -79,6 +79,8 @@ export class Preloader extends Scene {
             {
                 console.info(Date.now(), 'Preload complete');
             })
+            .image('bg',
+                require('../../assets/images/bg.png'))
             .atlas('sprites',
                 require('../../assets/images/sprites.png'),
                 sprites);

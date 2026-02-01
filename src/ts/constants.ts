@@ -36,3 +36,11 @@ export const getRandomSpriteName = (category: typeof spriteCategories[number]): 
 };
 
 export const itemCategories = ['facial', 'glasses', 'hair', 'hat', 'accessory'] as const;
+
+export const clues = [
+    'Tall figure with distinctive gait',
+    'Scarred individual, average build',
+    'Weathered individual with calloused hands',
+    'Hooded figure with methodical movements',
+    'Lean person with striking features'
+] as const;
