@@ -16,6 +16,9 @@ export class Pick extends Scene {
     {
         console.info('Pick enter');
 
+        // Fade in from black
+        this.cameras.main.fadeIn(400, 0, 0, 0);
+
         new CustomCursor(this);
 
         const data = this.scene.settings.data as { baseFrames: string[], itemFrames: string[], clueIndex: number };
@@ -91,17 +94,36 @@ export class Pick extends Scene {
             const x = startX + itemSpacing * col;
             const y = startY + rowSpacing * row;
 
-            new SelectableItem(this, x, y, avatar)
-                .setScale(3.3)
-                .on('toggled', (selected: boolean) =>
-                {
-                    if (!selected)
-                    {
-                        return;
-                    }
+            const selectableItem = new SelectableItem(this, x, y, avatar)
+                .setScale(3.3);
 
+            // Fade in sequentially with slight delay
+            selectableItem.setAlpha(0);
+            this.tweens.add({
+                targets: selectableItem,
+                alpha: 1,
+                duration: 300,
+                delay: i * 60,
+                ease: 'Power2.easeIn'
+            });
+
+            selectableItem.on('toggled', (selected: boolean) =>
+            {
+                if (!selected)
+                {
+                    return;
+                }
+
+                // Camera shake on selection
+                this.cameras.main.shake(300, 0.01);
+
+                // Fade out to black and transition back to game scene
+                this.cameras.main.fadeOut(400, 0, 0, 0);
+                this.time.delayedCall(400, () =>
+                {
                     this.scene.start('game');
                 });
+            });
         });
     }
 }
