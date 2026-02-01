@@ -112,12 +112,43 @@ export class Game extends Scene {
         });
 
         avatar.setInteractive()
+            .on('pointerover', () =>
+            {
+                this.tweens.add({
+                    targets: avatar,
+                    scaleX: 5.4,
+                    scaleY: 5.4,
+                    duration: 150,
+                    ease: 'Back.easeOut'
+                });
+            })
+            .on('pointerout', () =>
+            {
+                this.tweens.add({
+                    targets: avatar,
+                    scaleX: 5,
+                    scaleY: 5,
+                    duration: 150,
+                    ease: 'Back.easeOut'
+                });
+            })
             .on('pointerdown', () =>
             {
-                this.scene.start('pick', {
-                    baseFrames: avatar.base.getFrames(),
-                    itemFrames: avatar.getItemFrames(),
-                    clueIndex
+                this.tweens.add({
+                    targets: avatar,
+                    scaleX: 4.6,
+                    scaleY: 4.6,
+                    duration: 80,
+                    ease: 'Power2',
+                    yoyo: true,
+                    onComplete: () =>
+                    {
+                        this.scene.start('pick', {
+                            baseFrames: avatar.base.getFrames(),
+                            itemFrames: avatar.getItemFrames(),
+                            clueIndex
+                        });
+                    }
                 });
             });
 
