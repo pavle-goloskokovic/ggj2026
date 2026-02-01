@@ -34,3 +34,5 @@ export const getRandomSpriteName = (category: typeof spriteCategories[number]): 
     const index = Math.floor(Math.random() * max) + 1;
     return `${category}${String(index).padStart(2, '0')}`;
 };
+
+export const itemCategories = ['facial', 'glasses', 'hair', 'hat', 'accessory'] as const;

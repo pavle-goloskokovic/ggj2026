@@ -8,7 +8,7 @@ export default class AvatarBase extends Phaser.GameObjects.Container {
         // Add sprites in the specified order
         const categories = ['background', 'base', 'eyes', 'eyebrows', 'nose', 'mouth', 'clothing'] as const;
 
-        categories.forEach(category =>
+        categories.forEach((category) =>
         {
             const spriteName = getRandomSpriteName(category);
             const image = scene.add.image(0, 0, 'sprites', spriteName);

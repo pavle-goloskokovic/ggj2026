@@ -3,8 +3,7 @@ import Scene = Phaser.Scene;
 import AvatarBase from '../classes/AvatarBase';
 import Avatar from '../classes/Avatar';
 import SelectableItem from '../classes/SelectableItem';
-import type { spriteCategories } from '../constants';
-import { getRandomSpriteName } from '../constants';
+import { getRandomSpriteName, itemCategories } from '../constants';
 
 /**
  * Game Phaser scene.
@@ -39,7 +38,7 @@ export class Game extends Scene {
                     return;
                 }
 
-                bases.forEach(other =>
+                bases.forEach((other) =>
                 {
                     if (other !== base)
                     {
@@ -51,7 +50,6 @@ export class Game extends Scene {
             });
         }
 
-        const itemCategories = ['accessory', 'facial', 'glasses', 'hair', 'hat'] as const;
         const itemCount = 10;
         const itemsPerRow = 5;
         const row1Y = scale.height * 0.3;
@@ -67,7 +65,7 @@ export class Game extends Scene {
             const x = itemSpacing * (colIndex + 1);
             const y = rowIndex === 0 ? row1Y : row2Y;
             const category = Phaser.Utils.Array
-                .GetRandom(itemCategories as any as typeof spriteCategories[number][]);
+                .GetRandom(itemCategories as any as typeof itemCategories[number][]);
             const spriteName = getRandomSpriteName(category);
             if (usedFrames.has(spriteName))
             {
@@ -85,6 +83,22 @@ export class Game extends Scene {
         const avatarY = (scale.height + secondRowBottom) / 2;
         const avatar = new Avatar(this, scale.width / 3, avatarY)
             .setScale(5);
+
+        items.forEach((item) =>
+        {
+            item.on('toggled', (selected: boolean) =>
+            {
+                const frame = (item.list[0] as Phaser.GameObjects.Image).frame.name;
+                if (selected)
+                {
+                    avatar.addItem(frame);
+                }
+                else
+                {
+                    avatar.removeItem(frame);
+                }
+            });
+        });
 
         bases[0].setSelected(true);
     }
