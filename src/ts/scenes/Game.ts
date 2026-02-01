@@ -113,11 +113,13 @@ export class Game extends Scene {
             {
                 this.scene.restart({
                     baseFrames: avatar.base.getFrames(),
-                    itemFrames: avatar.getItemFrames()
+                    itemFrames: avatar.getItemFrames(),
+                    clueIndex
                 });
             });
 
-        const randomClue = Phaser.Utils.Array.GetRandom(clues as any as string[]);
+        const clueIndex = Math.floor(Math.random() * clues.length);
+        const randomClue = clues[clueIndex];
         this.add.text(scale.width * 2 / 3, avatarY, randomClue, {
             fontSize: '24px',
             color: '#ffffff',
