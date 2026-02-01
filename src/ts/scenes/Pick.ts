@@ -3,6 +3,7 @@ import Scene = Phaser.Scene;
 import Avatar from '../classes/Avatar';
 import SelectableItem from '../classes/SelectableItem';
 import { targetAvatars, itemCategories, getRandomSpriteName, clues } from '../constants';
+import CustomCursor from '../classes/CustomCursor';
 
 /**
  * Pick Phaser scene.
@@ -14,6 +15,8 @@ export class Pick extends Scene {
     create (): void
     {
         console.info('Pick enter');
+
+        new CustomCursor(this);
 
         const data = this.scene.settings.data as { baseFrames: string[], itemFrames: string[], clueIndex: number };
         console.info('Pick data', data);

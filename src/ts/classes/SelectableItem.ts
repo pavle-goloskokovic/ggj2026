@@ -22,7 +22,7 @@ export default class SelectableItem extends Phaser.GameObjects.Container {
         // Add this container to the scene
         scene.add.existing(this);
 
-        child.setInteractive({ cursor: 'pointer' })
+        child.setInteractive()
             .on('pointerdown', this.toggle, this);
     }
 

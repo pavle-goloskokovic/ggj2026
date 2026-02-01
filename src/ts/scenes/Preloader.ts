@@ -3,6 +3,7 @@ import Scene = Phaser.Scene;
 import File = Phaser.Loader.File;
 import { /*playSound,*/ removeOnShutdown } from './utils';
 import sprites from '../sprites';
+import { cursorAutoKey, cursorPointerKey, cursorAutoUrl, cursorPointerUrl } from '../cursors';
 
 const preloadAudio = (scene: Scene) =>
 {
@@ -79,6 +80,10 @@ export class Preloader extends Scene {
             {
                 console.info(Date.now(), 'Preload complete');
             })
+            .image(cursorAutoKey,
+                cursorAutoUrl)
+            .image(cursorPointerKey,
+                cursorPointerUrl)
             .image('bg',
                 require('../../assets/images/bg.png'))
             .atlas('sprites',

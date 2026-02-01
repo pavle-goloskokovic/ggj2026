@@ -4,6 +4,7 @@ import AvatarBase from '../classes/AvatarBase';
 import Avatar from '../classes/Avatar';
 import SelectableItem from '../classes/SelectableItem';
 import { getRandomSpriteName, itemCategories, clues } from '../constants';
+import CustomCursor from '../classes/CustomCursor';
 
 /**
  * Game Phaser scene.
@@ -17,6 +18,8 @@ export class Game extends Scene {
     create (): void
     {
         console.info('Game enter');
+
+        new CustomCursor(this);
 
         const scale = this.scale;
 
@@ -108,7 +111,7 @@ export class Game extends Scene {
             });
         });
 
-        avatar.setInteractive({ cursor: 'pointer' })
+        avatar.setInteractive()
             .on('pointerdown', () =>
             {
                 this.scene.start('pick', {
