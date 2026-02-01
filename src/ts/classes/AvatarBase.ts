@@ -40,4 +40,13 @@ export default class AvatarBase extends Phaser.GameObjects.Container {
         }
         ) as typeof baseCategories[number][];
     }
+
+    setFrames (frames: string[]): void
+    {
+        const children = this.list as Phaser.GameObjects.Image[];
+        for (let i = 0; i < children.length && i < frames.length; i++)
+        {
+            children[i].setFrame(frames[i]);
+        }
+    }
 }

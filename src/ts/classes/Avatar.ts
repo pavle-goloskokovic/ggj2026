@@ -6,14 +6,31 @@ export default class Avatar extends Phaser.GameObjects.Container {
     readonly base: AvatarBase;
     readonly items: Phaser.GameObjects.Image[] = [];
 
-    constructor (scene: Phaser.Scene, x: number, y: number)
+    constructor (scene: Phaser.Scene,
+        x: number, y: number,
+        baseFrames?: string[],
+        itemFrames?: string[]
+    )
     {
         super(scene, x, y);
 
         this.base = new AvatarBase(scene, 0, 0);
         this.add(this.base);
 
+        if (baseFrames)
+        {
+            this.base.setFrames(baseFrames);
+        }
+
         this.setSize(this.base.width, this.base.height);
+
+        if (itemFrames)
+        {
+            itemFrames.forEach((frame) =>
+            {
+                this.addItem(frame);
+            });
+        }
 
         scene.add.existing(this);
     }
@@ -50,5 +67,13 @@ export default class Avatar extends Phaser.GameObjects.Container {
 
         const [item] = this.items.splice(index, 1);
         this.remove(item, true);
+    }
+
+    getItemFrames (): string[]
+    {
+        return this.items.map((item) =>
+        {
+            return item.frame.name;
+        });
     }
 }

@@ -112,7 +112,8 @@ export class Game extends Scene {
             .on('pointerdown', () =>
             {
                 this.scene.restart({
-                    baseFrames: avatar.base.getFrames()
+                    baseFrames: avatar.base.getFrames(),
+                    itemFrames: avatar.getItemFrames()
                 });
             });
 
