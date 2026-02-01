@@ -1,5 +1,4 @@
 import type Phaser from 'phaser';
-import { cursorAutoKey, cursorPointerKey, cursorScale } from '../cursors';
 
 export default class CustomCursor {
 
@@ -11,11 +10,11 @@ export default class CustomCursor {
     {
         this.scene = scene;
 
-        this.cursorImage = scene.add.image(0, 0, cursorAutoKey)
+        this.cursorImage = scene.add.image(0, 0, 'sprites', 'cursor-auto')
             .setOrigin(0, 0)
             .setDepth(10000)
             .setScrollFactor(0)
-            .setScale(cursorScale);
+            .setScale(2);
 
         const pointer = scene.input.activePointer;
         this.cursorImage.setPosition(pointer.x, pointer.y);
@@ -34,7 +33,7 @@ export default class CustomCursor {
     private handleOver (): void
     {
         this.overCount++;
-        this.cursorImage.setTexture(cursorPointerKey);
+        this.cursorImage.setTexture('sprites', 'cursor-pointer');
     }
 
     private handleOut (): void
@@ -42,7 +41,7 @@ export default class CustomCursor {
         this.overCount = Math.max(0, this.overCount - 1);
         if (this.overCount === 0)
         {
-            this.cursorImage.setTexture(cursorAutoKey);
+            this.cursorImage.setTexture('sprites', 'cursor-auto');
         }
     }
 

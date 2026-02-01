@@ -26,7 +26,7 @@ export class Game extends Scene {
 
         const scale = this.scale;
 
-        const bg = this.add.image(scale.width / 2, scale.height / 2, 'bg');
+        const bg = this.add.image(scale.width / 2, scale.height / 2, 'sprites', 'bg');
         const scaleX = scale.width / bg.width;
         const scaleY = scale.height / bg.height;
         const bgScale = Math.max(scaleX, scaleY);

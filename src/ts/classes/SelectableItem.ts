@@ -40,6 +40,12 @@ export default class SelectableItem extends Phaser.GameObjects.Container {
             this.hoverTween.stop();
         }
 
+        // Change outline to hover state
+        if (!this.selected)
+        {
+            this.outline.setFrame('outline-hover');
+        }
+
         this.hoverTween = this.scene.tweens.add({
             targets: this,
             scaleX: this.baseScale * 1.08,
@@ -54,6 +60,12 @@ export default class SelectableItem extends Phaser.GameObjects.Container {
         if (this.hoverTween)
         {
             this.hoverTween.stop();
+        }
+
+        // Restore outline to unselected state
+        if (!this.selected)
+        {
+            this.outline.setFrame('outline-unselected');
         }
 
         this.hoverTween = this.scene.tweens.add({
