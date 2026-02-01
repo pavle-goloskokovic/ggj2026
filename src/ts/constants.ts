@@ -1,3 +1,13 @@
+export const baseCategories = [
+    'background',
+    'base',
+    'eyes',
+    'eyebrows',
+    'nose',
+    'mouth',
+    'clothing'
+] as const;
+
 export const spriteCategories = [
     'accessory',
     'background',
@@ -35,7 +45,13 @@ export const getRandomSpriteName = (category: typeof spriteCategories[number]): 
     return `${category}${String(index).padStart(2, '0')}`;
 };
 
-export const itemCategories = ['facial', 'glasses', 'hair', 'hat', 'accessory'] as const;
+export const itemCategories = [
+    'facial',
+    'glasses',
+    'hair',
+    'hat',
+    'accessory'
+] as const;
 
 export const clues = [
     'Tall figure with distinctive gait',

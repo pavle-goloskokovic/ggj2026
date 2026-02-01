@@ -108,6 +108,14 @@ export class Game extends Scene {
             });
         });
 
+        avatar.setInteractive({ cursor: 'pointer' })
+            .on('pointerdown', () =>
+            {
+                this.scene.restart({
+                    baseFrames: avatar.base.getFrames()
+                });
+            });
+
         const randomClue = Phaser.Utils.Array.GetRandom(clues as any as string[]);
         this.add.text(scale.width * 2 / 3, avatarY, randomClue, {
             fontSize: '24px',

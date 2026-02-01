@@ -1,4 +1,4 @@
-import { getRandomSpriteName } from '../constants';
+import { getRandomSpriteName, baseCategories } from '../constants';
 
 export default class AvatarBase extends Phaser.GameObjects.Container {
     constructor (scene: Phaser.Scene, x: number, y: number)
@@ -6,9 +6,7 @@ export default class AvatarBase extends Phaser.GameObjects.Container {
         super(scene, x, y);
 
         // Add sprites in the specified order
-        const categories = ['background', 'base', 'eyes', 'eyebrows', 'nose', 'mouth', 'clothing'] as const;
-
-        categories.forEach((category) =>
+        baseCategories.forEach((category) =>
         {
             const spriteName = getRandomSpriteName(category);
             const image = scene.add.image(0, 0, 'sprites', spriteName);
@@ -32,5 +30,14 @@ export default class AvatarBase extends Phaser.GameObjects.Container {
         {
             targetChildren[i].setFrame(sourceChildren[i].frame.name);
         }
+    }
+
+    getFrames (): typeof baseCategories[number][]
+    {
+        return (this.list as Phaser.GameObjects.Image[]).map((image) =>
+        {
+            return image.frame.name;
+        }
+        ) as typeof baseCategories[number][];
     }
 }

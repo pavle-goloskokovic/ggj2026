@@ -13,6 +13,8 @@ export default class Avatar extends Phaser.GameObjects.Container {
         this.base = new AvatarBase(scene, 0, 0);
         this.add(this.base);
 
+        this.setSize(this.base.width, this.base.height);
+
         scene.add.existing(this);
     }
 
