@@ -2,6 +2,9 @@ export default class SelectableItem extends Phaser.GameObjects.Container {
 
     private outline: Phaser.GameObjects.Image;
     private selected = false;
+    private baseScale = 1;
+    private hoverTween?: Phaser.Tweens.Tween;
+    private pulseTween?: Phaser.Tweens.Tween;
 
     constructor (
         scene: Phaser.Scene,
@@ -23,7 +26,60 @@ export default class SelectableItem extends Phaser.GameObjects.Container {
         scene.add.existing(this);
 
         child.setInteractive()
-            .on('pointerdown', this.toggle, this);
+            .on('pointerdown', this.handleClick, this)
+            .on('pointerover', this.handleHoverIn, this)
+            .on('pointerout', this.handleHoverOut, this);
+
+        scene.events.once('shutdown', this.cleanup, this);
+    }
+
+    private handleHoverIn (): void
+    {
+        if (this.hoverTween)
+        {
+            this.hoverTween.stop();
+        }
+
+        this.hoverTween = this.scene.tweens.add({
+            targets: this,
+            scaleX: this.baseScale * 1.08,
+            scaleY: this.baseScale * 1.08,
+            duration: 150,
+            ease: 'Back.easeOut'
+        });
+    }
+
+    private handleHoverOut (): void
+    {
+        if (this.hoverTween)
+        {
+            this.hoverTween.stop();
+        }
+
+        this.hoverTween = this.scene.tweens.add({
+            targets: this,
+            scaleX: this.baseScale,
+            scaleY: this.baseScale,
+            duration: 150,
+            ease: 'Back.easeOut'
+        });
+    }
+
+    private handleClick (): void
+    {
+        // Click animation: scale down then bounce back
+        this.scene.tweens.add({
+            targets: this,
+            scaleX: this.baseScale * 0.92,
+            scaleY: this.baseScale * 0.92,
+            duration: 80,
+            ease: 'Power2',
+            yoyo: true,
+            onComplete: () =>
+            {
+                this.toggle();
+            }
+        });
     }
 
     toggle (): void
@@ -40,6 +96,50 @@ export default class SelectableItem extends Phaser.GameObjects.Container {
     {
         this.selected = value;
         this.outline.setFrame(this.selected ? 'outline-selected' : 'outline-unselected');
+
+        // Stop any existing pulse
+        if (this.pulseTween)
+        {
+            this.pulseTween.stop();
+            this.pulseTween = null;
+        }
+
+        // Add pulse effect when selected
+        if (this.selected)
+        {
+            this.outline.setAngle(0);
+            this.pulseTween = this.scene.tweens.add({
+                targets: this.outline,
+                angle: { from: -1, to: 1 },
+                duration: 800,
+                ease: 'Sine.easeInOut',
+                yoyo: true,
+                repeat: -1
+            });
+        }
+        else
+        {
+            this.outline.setAngle(0);
+        }
+
         this.emit('toggled', this.selected);
+    }
+
+    setScale (x: number, y?: number): this
+    {
+        this.baseScale = x;
+        return super.setScale(x, y);
+    }
+
+    private cleanup (): void
+    {
+        if (this.hoverTween)
+        {
+            this.hoverTween.stop();
+        }
+        if (this.pulseTween)
+        {
+            this.pulseTween.stop();
+        }
     }
 }
