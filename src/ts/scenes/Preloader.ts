@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import Scene = Phaser.Scene;
 import File = Phaser.Loader.File;
-import { /*playSound,*/ removeOnShutdown } from './utils';
+import { playSound, removeOnShutdown } from './utils';
 import sprites from '../sprites';
 
 const preloadAudio = (scene: Scene) =>
@@ -29,14 +29,19 @@ const preloadAudio = (scene: Scene) =>
         {
             console.info(Date.now(), 'Preload audio complete');
         })
-        /*.audio('music', require('../../assets/audio/music.mp3'))
+        .audio('deselect', require('../../assets/audio/deselect.mp3'))
+        .audio('hover', require('../../assets/audio/hover.mp3'))
+        .audio('melodic1', require('../../assets/audio/melodic1.mp3'))
+        .audio('melodic2', require('../../assets/audio/melodic2.mp3'))
+        .audio('select', require('../../assets/audio/select.mp3'))
+        .audio('music', require('../../assets/audio/music.mp3'))
         .once('filecomplete-audio-music', () =>
         {
             playSound(scene, 'music', {
                 loop: true,
-                volume: 0.5
+                volume: 0.3
             });
-        })*/
+        })
         .start();
 };
 

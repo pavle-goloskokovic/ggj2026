@@ -18,7 +18,7 @@ export const playSound = (scene: Scene,
 {
     const sound = scene.sound;
 
-    if (sound.locked) { return; }
+    // if (sound.locked) { return; }
 
     try
     {

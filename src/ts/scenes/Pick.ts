@@ -4,6 +4,7 @@ import Avatar from '../classes/Avatar';
 import SelectableItem from '../classes/SelectableItem';
 import { targetAvatars, itemCategories, getRandomSpriteName, clues } from '../constants';
 import CustomCursor from '../classes/CustomCursor';
+import { playSound } from './utils';
 
 /**
  * Pick Phaser scene.
@@ -15,6 +16,10 @@ export class Pick extends Scene {
     create (): void
     {
         console.info('Pick enter');
+
+        // Play random melodic sound
+        const melodicSound = Phaser.Math.RND.pick(['melodic1', 'melodic2']);
+        playSound(this, melodicSound);
 
         // Fade in from black
         this.cameras.main.fadeIn(400, 0, 0, 0);

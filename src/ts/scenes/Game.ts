@@ -5,6 +5,7 @@ import Avatar from '../classes/Avatar';
 import SelectableItem from '../classes/SelectableItem';
 import { getRandomSpriteName, itemCategories, clues } from '../constants';
 import CustomCursor from '../classes/CustomCursor';
+import { playSound } from './utils';
 
 /**
  * Game Phaser scene.
@@ -18,6 +19,10 @@ export class Game extends Scene {
     create (): void
     {
         console.info('Game enter');
+
+        // Play random melodic sound
+        const melodicSound = Phaser.Math.RND.pick(['melodic1', 'melodic2']);
+        playSound(this, melodicSound);
 
         // Fade in from black
         this.cameras.main.fadeIn(400, 0, 0, 0);
@@ -150,6 +155,8 @@ export class Game extends Scene {
         avatar.setInteractive()
             .on('pointerover', () =>
             {
+                playSound(this, 'hover');
+
                 this.tweens.add({
                     targets: avatar,
                     scaleX: 5.4,
@@ -170,6 +177,8 @@ export class Game extends Scene {
             })
             .on('pointerdown', () =>
             {
+                playSound(this, 'select');
+
                 this.tweens.add({
                     targets: avatar,
                     scaleX: 4.6,

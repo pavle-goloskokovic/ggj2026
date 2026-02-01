@@ -1,3 +1,5 @@
+import { playSound } from '../scenes/utils';
+
 export default class SelectableItem extends Phaser.GameObjects.Container {
 
     private outline: Phaser.GameObjects.Image;
@@ -39,6 +41,9 @@ export default class SelectableItem extends Phaser.GameObjects.Container {
         {
             this.hoverTween.stop();
         }
+
+        // Play hover sound
+        playSound(this.scene, 'hover');
 
         // Change outline to hover state
         if (!this.selected)
@@ -108,6 +113,9 @@ export default class SelectableItem extends Phaser.GameObjects.Container {
     {
         this.selected = value;
         this.outline.setFrame(this.selected ? 'outline-selected' : 'outline-unselected');
+
+        // Play select or deselect sound
+        playSound(this.scene, this.selected ? 'select' : 'deselect');
 
         // Stop any existing pulse
         if (this.pulseTween)
